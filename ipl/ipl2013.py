@@ -1,25 +1,20 @@
+import sys
 import operator
 import pickle
 import random
 
-points_table = { 'CSK': 18,
-                 'MI' : 16,
-                 'RR' : 16,
-                 'RCB': 14,
-                 'SRH': 14,
+points_table = { 'CSK': 20,
+                 'MI' : 18,
+                 'RR' : 18,
+                 'RCB': 16,
+                 'SRH': 16,
                  'KXP': 10,
-                 'KKR':  8,
+                 'KKR': 10,
                  'DD' :  6,
                  'PWI':  4
                 }
 
 match_schedule = [
-                   (54, ('SRH',  'CSK')),
-                   (55, ('KXP',  'RR' )),
-                   (56, ('PWI',  'KKR')),
-                   (57, ('DD' ,  'RCB')),
-                   (58, ('PWI',  'MI' )),
-                   (59, ('KXP',  'SRH')),
                    (60, ('KKR',  'RCB')),
                    (61, ('RR' ,  'CSK')),
                    (62, ('MI' ,  'SRH')),
@@ -83,4 +78,6 @@ def myprint(a):
 
 norm_qual = map(lambda x : (x[0], 100.0*x[1]/total_pts_comb), 
         qual_chance.iteritems())
-print norm_qual
+norm_qual_sorted = sorted(norm_qual, key=operator.itemgetter(1),
+        reverse=True)
+map((lambda x : sys.stdout.write("%s, %0.3f\n"%(x[0], x[1]))), norm_qual_sorted)
