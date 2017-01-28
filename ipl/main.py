@@ -69,18 +69,27 @@ class Match:
         ]
 
 
-def main():
+def parse_matches():
     with open("./matches.csv") as fp:
         reader = csv.reader(fp)
         rows = [row for row in csv.reader(fp)]
         matches = { int(row[0]) : Match(row) for row in rows[1: ] }
+    return matches
 
+
+def parse_deliveries():
     with open("./deliveries.csv") as fp:
         reader = csv.reader(fp)
         rows = [row for row in csv.reader(fp)]
         deliveries = { int(row[0]) : Delivery(row) for row in rows[1: ] }
+    return deliveries
 
+
+def main():
+    matches = parse_matches()
+    deliveries = parse_deliveries()
     return
+
 
 if __name__ == "__main__":
     main()
