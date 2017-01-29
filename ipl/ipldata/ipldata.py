@@ -78,7 +78,7 @@ def get_matches():
     return matches
 
 
-def get_deliveries():
+def get_deliveries(enhance=True):
     with open(pkg_resources.resource_filename(__name__, os.path.join('data', 'deliveries.csv'))) as fp:
         reader = csv.reader(fp)
         rows = [row for row in csv.reader(fp)]
@@ -87,4 +87,9 @@ def get_deliveries():
         for row in rows[1: ]:
             deliveries[delivery_counter] = Delivery(row)
             delivery_counter += 1
-    return deliveries
+
+    if not enhance:
+        return deliveries
+    else:
+        # TODO(raajay) add a function to add required run rate at each delivery
+        return deliveries
